@@ -49,8 +49,7 @@ export default () =>
       const { x: startX } = getElementClientCenter(maxBullet);
       await moveBullet({
         bullet: maxBullet,
-        longitude: startX,
-        isMaxBullet: true,
+        longitude: -startX,
       });
 
       const maxBulletXAfter = maxBullet.getBoundingClientRect().x;

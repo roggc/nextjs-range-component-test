@@ -8,12 +8,7 @@ export function getElementClientCenter(element) {
   };
 }
 export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-export const moveBullet = async ({
-  bullet,
-  longitude,
-  isMaxBullet = false,
-  numOfSteps = 60,
-}) => {
+export const moveBullet = async ({ bullet, longitude, numOfSteps = 60 }) => {
   const portal = screen.getByTestId("portal");
   const from = getElementClientCenter(bullet);
   const current = {
@@ -24,9 +19,7 @@ export const moveBullet = async ({
   fireEvent.mouseDown(bullet, current);
   const steps = [...Array(numOfSteps).keys()];
   for (const step of steps) {
-    const x = isMaxBullet
-      ? from.x - (step * longitude) / numOfSteps
-      : from.x + (step * longitude) / numOfSteps;
+    const x = from.x + (step * longitude) / numOfSteps;
     fireEvent.mouseMove(portal, { clientX: x, clientY: from.y });
     await sleep(20);
   }
